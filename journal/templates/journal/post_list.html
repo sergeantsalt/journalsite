@@ -1,17 +1,12 @@
-<html>
-    <head>
-        <title>My Journal</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">My Journal</a></h1>
-        </div>
-        {% for post in posts %}
-            <div>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.published_date }}</p>
-                <p>{{ post.text | linebreaksbr }}</p>
+{% extends 'journal/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-        {% endfor %}        
-    </body>
-</html>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
